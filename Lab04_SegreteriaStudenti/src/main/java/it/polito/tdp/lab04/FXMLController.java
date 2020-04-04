@@ -5,6 +5,7 @@
 package it.polito.tdp.lab04;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.lab04.model.Corso;
@@ -69,7 +70,9 @@ public class FXMLController {
 		
 		choiceBC.setItems(listChoiceB);
 		
-		btnCompl.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
+		choiceBC.setValue("");
+		
+		//btnCompl.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
 	}
     
     @FXML
@@ -95,6 +98,25 @@ public class FXMLController {
 
     @FXML
     void cercaIscrittiCorso(ActionEvent event) {
+    	
+    	tFM.clear();
+    	tFN.clear();
+    	tFC.clear();
+    	tAOutput.clear();
+    	
+    	String nomeC = choiceBC.getValue();
+    	
+    	if(nomeC.equals("")){
+    		tAOutput.setText("Devi selezionare un corso");
+    		return;
+    	}
+    	
+    	List<Studente> list = model.cercaIscrittiCorso(nomeC);
+    	
+    	for(Studente s : list) {
+    		tAOutput.appendText(s.toString()+"\n");
+    	}
+    	
 
     }
 

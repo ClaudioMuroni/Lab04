@@ -28,4 +28,11 @@ public class Model {
 		return studenteDAO.cercaStudByMatr(matrn);
 	}
 
+	public List<Studente> cercaIscrittiCorso(String nomeC) {
+		// TODO Auto-generated method stub
+		
+		Corso c = new Corso(null, null, nomeC, null);
+		return corsoDAO.getStudentiIscrittiAlCorso(c);
+	}
+
 }

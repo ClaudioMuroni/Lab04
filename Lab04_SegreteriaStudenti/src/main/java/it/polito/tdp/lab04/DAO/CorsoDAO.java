@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class CorsoDAO {
 			
 		} catch (SQLException e) {
 			// e.printStackTrace();
-			throw new RuntimeException("Errore Db", e);
+			throw new RuntimeException("Errore Db", e); //Copiata
 		}
 	}
 	
@@ -58,14 +59,47 @@ public class CorsoDAO {
 	 * Dato un codice insegnamento, ottengo il corso
 	 */
 	public void getCorso(Corso corso) {
-		// TODO
+		// TODO IGNORARE
 	}
 
 	/*
 	 * Ottengo tutti gli studenti iscritti al Corso
 	 */
-	public void getStudentiIscrittiAlCorso(Corso corso) {
+	public List<Studente> getStudentiIscrittiAlCorso(Corso corso) {
 		// TODO
+		
+		final String sql = "SELECT s.matricola, s.cognome, s.nome, s.cds, c.nome FROM studente AS s, iscrizione AS i, corso AS c\r\n" + 
+				"WHERE s.matricola=i.matricola AND i.codins=c.codins AND c.nome=?";
+		
+		List<Studente> list = new ArrayList<Studente>();
+		Studente s;
+		
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, corso.getNome());
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				int m = rs.getInt(1);
+				String c = rs.getString(2);
+				String n = rs.getString(3);
+				String cds = rs.getString(4);
+				
+				s = new Studente(m, c, n, cds); 
+				
+				list.add(s);
+			}
+			
+			conn.close();
+			
+		}catch (SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException("Errore Db", e); //Copiata
+		}
+		
+		return list;
 	}
 
 	/*

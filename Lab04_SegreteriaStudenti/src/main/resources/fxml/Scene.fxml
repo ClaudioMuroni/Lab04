@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.lab04.FXMLController">
    <top>
@@ -35,7 +36,10 @@
                <children>
                   <Label text="Studente" />
                   <TextField fx:id="tFM" promptText="Matricola" />
-                  <Button fx:id="btnCompl" mnemonicParsing="false" onAction="#completamento" text="√" textFill="WHITE" />
+                  <Button fx:id="btnCompl" mnemonicParsing="false" onAction="#completamento" style="-fx-background-color: GREEN;" text="√" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
                   <TextField fx:id="tFN" editable="false" promptText="Nome" />
                   <TextField fx:id="tFC" editable="false" promptText="Cognome" />
                </children>
