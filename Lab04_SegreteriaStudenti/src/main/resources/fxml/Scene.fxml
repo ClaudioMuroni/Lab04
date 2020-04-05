@@ -64,7 +64,10 @@
                   <Insets />
                </VBox.margin>
             </GridPane>
-            <TextArea fx:id="tAOutput" editable="false" />
+            <TextArea fx:id="tAOutput" editable="false">
+               <font>
+                  <Font name="Courier New" size="12.0" />
+               </font></TextArea>
             <HBox alignment="CENTER_RIGHT">
                <children>
                   <Button mnemonicParsing="false" onAction="#clearAll" text="Reset" />

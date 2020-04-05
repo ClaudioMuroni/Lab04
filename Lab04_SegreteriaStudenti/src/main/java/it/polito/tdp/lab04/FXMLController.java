@@ -113,10 +113,21 @@ public class FXMLController {
     	
     	List<Studente> list = model.cercaIscrittiCorso(nomeC);
     	
+    	StringBuilder sb = new StringBuilder();
+    	
     	for(Studente s : list) {
-    		tAOutput.appendText(s.toString()+"\n");
+    		
+    		sb.append(String.format("%-10s ", s.getMatricola()));
+    		sb.append(String.format("%-20s ", s.getCognome()));
+    		sb.append(String.format("%-20s ", s.getNome()));
+    		sb.append(String.format("%-10s ", s.getCds()));
+    		
+    		sb.append("\n");
+    		
+    		//tAOutput.appendText(s.toString()+"\n");
     	}
     	
+    	tAOutput.setText(sb.toString());
 
     }
 
