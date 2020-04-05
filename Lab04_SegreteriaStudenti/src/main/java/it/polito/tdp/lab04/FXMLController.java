@@ -93,6 +93,34 @@ public class FXMLController {
 
 	@FXML
     void cercaCorsi(ActionEvent event) {
+		
+		tFN.clear();
+    	tFC.clear();
+    	tAOutput.clear();
+    	
+    	Studente stud = model.cercaStudByMatr(tFM.getText());
+    	
+    	if(stud==null) {
+    		tAOutput.setText("Matricola errata");
+    		return;
+    	}
+    	
+    List<Corso> list = model.cercaCorsiByStud(stud.getMatricola());
+    
+    StringBuilder sb = new StringBuilder();
+	
+	for(Corso c : list) {
+		
+		sb.append(String.format("%-10s ", c.getCodins()));
+		sb.append(String.format("%-5s ", c.getCrediti()));
+		sb.append(String.format("%-45s ", c.getNome()));
+		sb.append(String.format("%-5s ", c.getPd()));
+		
+		sb.append("\n");
+
+	}
+	
+	tAOutput.setText(sb.toString());
 
     }
 
@@ -118,8 +146,8 @@ public class FXMLController {
     	for(Studente s : list) {
     		
     		sb.append(String.format("%-10s ", s.getMatricola()));
-    		sb.append(String.format("%-20s ", s.getCognome()));
-    		sb.append(String.format("%-20s ", s.getNome()));
+    		sb.append(String.format("%-25s ", s.getCognome()));
+    		sb.append(String.format("%-25s ", s.getNome()));
     		sb.append(String.format("%-10s ", s.getCds()));
     		
     		sb.append("\n");

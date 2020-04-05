@@ -59,7 +59,9 @@ public class CorsoDAO {
 	 * Dato un codice insegnamento, ottengo il corso
 	 */
 	public void getCorso(Corso corso) {
-		// TODO IGNORARE
+		// TODO 
+		
+		//IGNORARE
 	}
 
 	/*
@@ -109,6 +111,43 @@ public class CorsoDAO {
 		// TODO
 		// ritorna true se l'iscrizione e' avvenuta con successo
 		return false;
+	}
+
+
+	public List<Corso> cercaCorsiByStud(int matricola) {
+		// TODO Auto-generated method stub
+		
+		final String sql = "SELECT c.codins, c.crediti, c.nome, c.pd FROM corso AS c, iscrizione AS i\r\n" + 
+				"WHERE c.codins=i.codins AND i.matricola=?";
+		
+		List<Corso> list = new ArrayList<Corso>();
+		Corso c;
+		
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, matricola);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				String cod = rs.getString(1);
+				int cred = rs.getInt(2);
+				String n = rs.getString(3);
+				int pd = rs.getInt(4);
+				
+				c = new Corso(cod, cred, n, pd);
+				list.add(c);
+			}
+			
+			conn.close();
+			
+		}catch(SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException("Errore Db", e); //Copiata
+		}
+		
+		return list;
 	}
 
 }

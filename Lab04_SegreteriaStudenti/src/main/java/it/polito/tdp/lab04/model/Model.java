@@ -35,4 +35,12 @@ public class Model {
 		return corsoDAO.getStudentiIscrittiAlCorso(c);
 	}
 
+	public List<Corso> cercaCorsiByStud(int matricola) {
+		// TODO Auto-generated method stub
+		
+		return corsoDAO.cercaCorsiByStud(matricola);
+	}
+
+	
+
 }
